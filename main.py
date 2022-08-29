@@ -67,6 +67,8 @@ def sig_detect(document: BucketLocation = Body(embed=True)):
             }
         }
 
+# Signature verification route
+
 @app.post("/verify")
 def sig_verify(sign_1: BucketLocation = Body(embed=True), sign_2: BucketLocation = Body(embed=True)):
     signs = [os.path.join("temp",_.split("/")[-1]) for _ in [sign_1.location, sign_2.location]]

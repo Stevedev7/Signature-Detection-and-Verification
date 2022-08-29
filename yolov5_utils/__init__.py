@@ -1,0 +1,1 @@
+from .detect import signature_detection as detection_fn

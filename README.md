@@ -7,7 +7,7 @@
 pip install -r reuirements.txt
 ```
 3. Download the service account credential file and edit the properties.py file.
-4. Run the server
+4. Run the server. (Make sure you have the models in your gs bucket under models/yolov5 and models/vgg16 blob locations)
 ```bash
 uvicorn main:app --reload
 ```

@@ -50,7 +50,9 @@ def sig_detect(document: BucketLocation = Body(embed=True)):
     doc = download_image(document.location)
     if os.path.exists(doc):
         detections = detection_fn(doc)
+        # Delete the image from temp file
         delete_file(doc)
+        # Checking if the signatures are detected
         if "crops" in os.listdir(detections):
             bucket_location = upload_files(os.path.join(detections, "crops", "DLSignature"), document_name, DETECTION_DESTINATION)
 
@@ -75,7 +77,7 @@ def sig_verify(sign_1: BucketLocation = Body(embed=True), sign_2: BucketLocation
     for signature in [sign_1.location, sign_2.location]:
         sign = download_image(signature)
     
-    score = verify(signs[0], signs[1])
+    score = verify(signs[0], signs[1]) # Score > 8 can be assumed as similar signatures
     # Clean up
     for _ in signs:
         delete_file(f"{_}")
